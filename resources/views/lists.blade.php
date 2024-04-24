@@ -33,7 +33,7 @@
             @foreach($todo as $i)
             <tr>
                 <td style="border-bottom:1px solid black;padding:10px">{{$i->text}}</td>
-                <td>{{$i->user->name}}</td>
+                <td  style="border-bottom:1px solid black;padding:10px">{{$i->user->name}}</td>
                 <td style="border-bottom:1px solid black;padding:10px">
                     <form  action="/lists/{{$i->id}}" method="post">
                         @csrf

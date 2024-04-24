@@ -11,12 +11,16 @@ class Todo extends Model
     protected $fillable = ['text','user_id'];
     
     use HasFactory;
-
     public function user(){
         return $this-> belongsTo(
             User::class,
             'user_id',
             'id'
         );
+    }
+
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imagable');
     }
 }

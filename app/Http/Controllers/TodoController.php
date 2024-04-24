@@ -7,14 +7,34 @@ use Illuminate\Http\Request;
 use App\Models\Todo;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Tag;
+use App\Models\Image;
+
 
 class TodoController extends Controller
 {
     public function lists(){
+        $imagesTodo = Todo::find(3)->images();
 
-        $todo = Todo::get();     
-        return view('lists',[
-            'todo'=>$todo]);
+        foreach($imagesTodo as $i){
+            echo($i->image);
+        }
+
+        // $imageTag = Tag::find(1)->image1();
+
+        // foreach($imageTag as $i){
+        //     echo($i->image);
+        // }
+       
+        echo(Tag::find(1)->image()->first()->image);
+
+        // $todo = Todo::get();     
+        // return view('lists',[
+        //     'todo'=>$todo]);
+
+        
+
+        
     }
 
     public function insertTask(){
