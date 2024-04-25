@@ -13,28 +13,26 @@ use App\Models\Image;
 
 class TodoController extends Controller
 {
-    public function lists(){
-        $imagesTodo = Todo::find(3)->images();
+    public function lists(Request $request){
 
-        foreach($imagesTodo as $i){
-            echo($i->image);
-        }
+        $sort = $request->input('sort', '0'); 
 
-        // $imageTag = Tag::find(1)->image1();
+        $query = Todo::query();
+        if ($sort === '1') {
+            $query->orderBy('text', 'asc');
+        } 
+        $todo =  $query->get();
 
-        // foreach($imageTag as $i){
-        //     echo($i->image);
-        // }
-       
-        echo(Tag::find(1)->image()->first()->image);
+        return view('lists',['todo'=>$todo]);
 
-        // $todo = Todo::get();     
-        // return view('lists',[
-        //     'todo'=>$todo]);
+     
+    }
 
-        
 
-        
+    public function scopeSearch($query , $keyword)
+    {
+        $query->where('text', 'LIKE', '%' . $keyword . '%');
+        return $query;
     }
 
     public function insertTask(){
@@ -79,4 +77,8 @@ class TodoController extends Controller
         ]);
         return redirect('lists');
     }
+
+ 
+
+   
 }

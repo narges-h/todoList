@@ -17,6 +17,21 @@
                 </ul>
             </div>
     @endif
+  
+    <div style ="display:flex">
+        <p>تعداد کل تودوها : {{ $todo->count()}}</p>
+
+        <a style="margin: 15px;" href="{{ route('lists', ['sort' => '1']) }}">مرتب سازی</a>
+        <a style="margin: 15px;" href="{{ route('lists', ['sort' => '0']) }}">حذف مرتب سازی </a>
+
+        <form style="margin-left: 30px;margin-top: 15px;">
+            <input type="search" id="query" name="q" placeholder="Search..."&gt;>
+            <button>Search</button>
+        </form>
+    
+    </div>
+
+
     <form  action="/lists" method="post">
         <div style="margin-top: 20px;margin-right: 20px;display:flex">
             <label>Task</label>
@@ -48,6 +63,14 @@
                         @csrf
                         <div style="margin-top: 20px;">
                             <input style="background-color:#c4ef8b" type='submit' value="update">
+                        </div>
+                    </form>
+                </td>
+                <td style="border-bottom:1px solid black;padding:10px">
+                    <form  action="/images/{{$i->id}}" method="get">
+                        @csrf
+                        <div style="margin-top: 20px;">
+                            <input style="background-color:#c4ef8b" type='submit' value="Images">
                         </div>
                         
                     </form>
