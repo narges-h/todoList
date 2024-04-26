@@ -16,24 +16,17 @@ class TodoController extends Controller
     public function lists(Request $request){
 
         $sort = $request->input('sort', '0'); 
-
+        $searchTerm = $request->input('search' , '');
         $query = Todo::query();
+
+        $query->where('text', 'LIKE', '%' . $searchTerm . '%');
         if ($sort === '1') {
             $query->orderBy('text', 'asc');
         } 
         $todo =  $query->get();
-
         return view('lists',['todo'=>$todo]);
-
-     
     }
 
-
-    public function scopeSearch($query , $keyword)
-    {
-        $query->where('text', 'LIKE', '%' . $keyword . '%');
-        return $query;
-    }
 
     public function insertTask(){
 

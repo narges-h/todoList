@@ -14,6 +14,5 @@ Route::prefix('lists')->group(function(){
 });
     
 Route::get('images/{id}', [ImageController::class, 'imagesPage']);
-Route::controller(ImageController::class)->group(function(){
-    Route::post('/upload-image', 'storeImage')->name('image.store');
-});
+
+Route::post('/upload-image/{id}',[ImageController::class, 'storeImage']); 

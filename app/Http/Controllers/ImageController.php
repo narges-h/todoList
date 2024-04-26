@@ -20,22 +20,21 @@ class ImageController extends Controller
 
     }
     // Store Image
-    public function storeImage(Request $request)
+    public function storeImage(Request $request,$id)
     {
         $validate_data = Validator::make($request->all() , [
-            'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+            'image' => 'required|image',
         ])->validated();
 
         $imageName = time().'.'.$request->image->extension();
         $request->image->move(public_path('images'), $imageName);
 
     
-        Image::create([
-            'image' => $validate_data['image'],
+        Todo::find($id)->images()->create([
+            'image' => asset('images/' . $imageName),
         ]);
 
-        return back()->with('success', 'Image uploaded Successfully!')
-        ->with('image', $imageName);
+        return back()->with('success', 'Image uploaded Successfully!');
     }
 }
 

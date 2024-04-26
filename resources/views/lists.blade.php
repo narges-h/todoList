@@ -24,9 +24,13 @@
         <a style="margin: 15px;" href="{{ route('lists', ['sort' => '1']) }}">مرتب سازی</a>
         <a style="margin: 15px;" href="{{ route('lists', ['sort' => '0']) }}">حذف مرتب سازی </a>
 
-        <form style="margin-left: 30px;margin-top: 15px;">
-            <input type="search" id="query" name="q" placeholder="Search..."&gt;>
-            <button>Search</button>
+        <form style="margin-left: 30px;margin-top: 15px;" action="{{ route('lists') }}" method="GET" role="search">
+            <input type="search" name="search" placeholder="Search posts" id="search">
+            <button type="submit" title="Search posts" >Search</button>
+        </form>
+
+        <form style="margin-left: 30px;margin-top: 15px;" action="{{ route('lists') }}" method="GET" role="search">
+            <button type="submit" title="Search posts" >clear Search</button>
         </form>
     
     </div>
